@@ -1,0 +1,38 @@
+* Generate Express App
+
+Usage: express [options]
+
+Options:
+
+  -h, --help          output usage information
+  -V, --version       output the version number
+  -e, --ejs           add ejs engine support (defaults to jade)
+  -H, --hogan         add hogan.js engine support
+  -c, --css   add stylesheet  support (less|stylus) (defaults to plain css)
+  -f, --force         force on non-empty directory
+
+##################
+michael@michael:~/work/store-management$ express -e app
+
+   create : app
+   create : app/package.json
+   create : app/app.js
+   create : app/public
+   create : app/public/javascripts
+   create : app/public/images
+   create : app/public/stylesheets
+   create : app/public/stylesheets/style.css
+   create : app/routes
+   create : app/routes/index.js
+   create : app/routes/users.js
+   create : app/views
+   create : app/views/index.ejs
+   create : app/views/error.ejs
+   create : app/bin
+   create : app/bin/www
+
+   install dependencies:
+     $ cd app && npm install
+
+   run the app:
+     $ DEBUG=my-application ./bin/www
