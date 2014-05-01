@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+    
+  <link rel="shortcut icon" href="resources/img/favicon.ico">
+  <title>销售管理系统</title>
+  <!-- Bootstrap -->
+  <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+  <link href="/stylesheets/dashboard.css" rel="stylesheet">
+  <link href="/stylesheets/jquery.dataTables.css" rel="stylesheet">
+  <link href="/stylesheets/data-table.css" rel="stylesheet">
+  <!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
+  <link href="/stylesheets/jquery.fileupload.css" rel="stylesheet">
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+      <![endif]-->
+</head>
+<body>
+  <div class="navbar navbar-default navbar-static-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">销售管理系统</a>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="#">主页</a></li>
+          <li class="active"><a href="#">产品</a></li>
+          <li><a href="#">销售单</a></li>
+          <li><a href="#">订货单</a></li>
+          <li><a href="#">联系人</a></li>
+          <!-- 
+          <li class="dropdown">
+             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+             <ul class="dropdown-menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li class="dropdown-header">Nav header</li>
+                <li><a href="#">Separated link</a></li>
+                <li><a href="#">One more separated link</a></li>
+             </ul>
+           </li>
+            -->
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div><!-- /.-collapse -->
+  </div><!-- /#header-collapse -->
+
+  <div class="container">
+     
+    <div class="row">
+      <div class="col-md-7">
+        <table id="product-list" cellpadding="0" cellspacing="0" border="0" class="display" width="100%">
+        <thead>
+          <tr>
+            <th>款号</th>
+            <th>款号Alias</th>
+            <th>厂家款号</th>
+            <th>售价</th>
+            <th>库存</th>
+            <th>备注</th>
+            <th>编辑</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+        </table>
+      </div>
+      <div class="col-md-5 bs-example">
+        <form id="add-product-form" class="form-horizontal" role="form" action="product/create" method="post">
+          <div class="form-group">
+            <label for="input-item-name" class="col-sm-3 control-label">款号</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" id="input-item-name" name="itemName" placeholder="款号">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="input-item-alias" class="col-sm-3 control-label">款号Alias</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" id="input-item-alias" name="itemAlias" placeholder="款号 Alias">
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <div class="col-sm-offset-3 col-sm-9">
+              <button type="button" class="btn btn-primary">添加图片</button>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <div class="col-sm-offset-3 col-sm-9">
+              <button type="submit" class="btn btn-primary">保存产品</button>
+            </div>
+          </div>
+        </form>
+         
+        <div class="row">
+          <div class="col-md-3"></div>
+          <div class="col-md-9">
+            <!-- The fileinput-button span is used to style the file input field as button -->
+            <span class="btn btn-success fileinput-button">
+                <i class="glyphicon glyphicon-plus"></i>
+                <span>Select files...</span>
+                <!-- The file input field used as target for the file upload widget -->
+                <input id="fileupload" type="file" name="files[]" multiple>
+            </span>
+
+            <!-- The global progress bar -->
+            <div id="progress" class="progress">
+                <div class="progress-bar progress-bar-success"></div>
+            </div>
+
+            <!-- The container for the uploaded files -->
+            <div id="files" class="files">
+              
+            </div>
+          </div>
+        </div>
+        
+
+        
+
+            
+        
+      </div>
+    </div>
+    </div> <!-- /container -->
+    
+    
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="/javascripts/jquery/jquery.min.js"></script>
+
+<!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
+<script src="/javascripts/jquery.ui.widget.js"></script>
+<!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
+<script src="/javascripts/jquery.iframe-transport.js"></script>
+<!-- The basic File Upload plugin -->
+<script src="/javascripts/jquery.fileupload.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/javascripts/bootstrap/bootstrap.min.js"></script>
+<script src="/javascripts/bootstrap/docs.min.js"></script>
+<script src="/javascripts/jquery/jquery.dataTables.min.js"></script>
+<script src="/javascripts/application.js"></script>
+
+<script>
+$('#fileupload').fileupload({
+    url: "upload",
+    dataType: 'json',
+    // acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
+    maxFileSize: 5000000, // 5 MB
+
+    done: function (e, data) {
+      data.context = $('<div/>').appendTo('#files');
+      $.each(data.files, function (index, file) {
+          var node = $('<p/>')
+                  .append($('<span/>').text(file.name));
+          /*        
+          if (!index) {
+              node
+                  .append('<br>')
+                  .append(uploadButton.clone(true).data(data));
+          }
+          */
+          node.appendTo(data.context);
+      });
+    },
+    progressall: function (e, data) {
+        var progress = parseInt(data.loaded / data.total * 100, 10);
+        console.log(progress);
+        $('#progress .progress-bar').css(
+            'width',
+            progress + '%'
+        );
+    }
+}).prop('disabled', !$.support.fileInput)
+    .parent().addClass($.support.fileInput ? undefined : 'disabled');
+</script>
+</body>
+</html>
