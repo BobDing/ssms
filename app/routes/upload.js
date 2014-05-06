@@ -9,19 +9,21 @@ router.post('/', function(req, res) {
 
 module.exports = router;
 */
-
 var upload = require('jquery-file-upload-middleware');
 // configure upload middleware
+console.log(__dirname);
 upload.configure({
-    uploadDir: __dirname + '/public/uploads',
+    uploadDir: __dirname + '../public/uploads',
     uploadUrl: '/uploads',
     
+    /*
     imageVersions: {
         thumbnail: {
             width: 80,
             height: 80
         }
     }
+    */
     
 });
 

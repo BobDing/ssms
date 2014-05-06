@@ -16,6 +16,8 @@
   <link href="/stylesheets/data-table.css" rel="stylesheet">
   <!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
   <link href="/stylesheets/jquery.fileupload.css" rel="stylesheet">
+  <link href="/stylesheets/style.css" rel="stylesheet">
+
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -42,29 +44,14 @@
           <li><a href="#">销售单</a></li>
           <li><a href="#">订货单</a></li>
           <li><a href="#">联系人</a></li>
-          <!-- 
-          <li class="dropdown">
-             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-             <ul class="dropdown-menu">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
-                <li class="divider"></li>
-                <li class="dropdown-header">Nav header</li>
-                <li><a href="#">Separated link</a></li>
-                <li><a href="#">One more separated link</a></li>
-             </ul>
-           </li>
-            -->
         </ul>
       </div><!--/.nav-collapse -->
     </div><!-- /.-collapse -->
   </div><!-- /#header-collapse -->
 
   <div class="container">
-     
     <div class="row">
-      <div class="col-md-7">
+      <div class="col-md-8">
         <table id="product-list" cellpadding="0" cellspacing="0" border="0" class="display" width="100%">
         <thead>
           <tr>
@@ -73,16 +60,21 @@
             <th>厂家款号</th>
             <th>售价</th>
             <th>库存</th>
+            <th>id</th>
+            <!--
             <th>备注</th>
             <th>编辑</th>
+            -->
           </tr>
         </thead>
         <tbody>
         </tbody>
         </table>
       </div>
-      <div class="col-md-5 bs-example">
-        <form id="add-product-form" class="form-horizontal" role="form" action="product/create" method="post">
+
+      <div class="col-md-4 bs-example">
+        <form id="add-product-form" class="form-horizontal" role="form" action="/product/add" method="post">
+          <input type="hidden" name="_id">
           <div class="form-group">
             <label for="input-item-name" class="col-sm-3 control-label">款号</label>
             <div class="col-sm-9">
@@ -95,10 +87,40 @@
               <input type="text" class="form-control" id="input-item-alias" name="itemAlias" placeholder="款号 Alias">
             </div>
           </div>
-          
           <div class="form-group">
-            <div class="col-sm-offset-3 col-sm-9">
-              <button type="button" class="btn btn-primary">添加图片</button>
+            <label for="input-item-alias" class="col-sm-3 control-label">厂家</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" id="input-item-alias" name="mfgName" placeholder="mfgName">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="input-item-alias" class="col-sm-3 control-label">厂家款号</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" id="input-item-alias" name="mfgItemName" placeholder="mfgItemName">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="input-item-alias" class="col-sm-3 control-label">成本</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" id="input-item-alias" name="costPrice" placeholder="costPrice">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="input-item-alias" class="col-sm-3 control-label">售价</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" id="input-item-alias" name="sellPrice" placeholder="售价">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="input-item-alias" class="col-sm-3 control-label">库存</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" id="input-item-alias" name="inventory" placeholder="库存">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="input-item-alias" class="col-sm-3 control-label">备注</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" id="input-item-alias" name="description" placeholder="备注">
             </div>
           </div>
           
@@ -115,7 +137,7 @@
             <!-- The fileinput-button span is used to style the file input field as button -->
             <span class="btn btn-success fileinput-button">
                 <i class="glyphicon glyphicon-plus"></i>
-                <span>Select files...</span>
+                <span>添加图片...</span>
                 <!-- The file input field used as target for the file upload widget -->
                 <input id="fileupload" type="file" name="files[]" multiple>
             </span>
@@ -145,50 +167,33 @@
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="/javascripts/jquery/jquery.min.js"></script>
 
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/javascripts/bootstrap/bootstrap.min.js"></script>
+<script src="/javascripts/bootstrap/docs.min.js"></script>
+<script src="/javascripts/jquery/jquery.dataTables.js"></script>
+<script src="/javascripts/application.js"></script>
+
+<!-- The Load Image plugin is included for the preview images and image resizing functionality -->
+<script src="http://blueimp.github.io/JavaScript-Load-Image/js/load-image.min.js"></script>
+<!-- The Canvas to Blob plugin is included for image resizing functionality -->
+<script src="http://blueimp.github.io/JavaScript-Canvas-to-Blob/js/canvas-to-blob.min.js"></script>
 <!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
 <script src="/javascripts/jquery.ui.widget.js"></script>
 <!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
 <script src="/javascripts/jquery.iframe-transport.js"></script>
 <!-- The basic File Upload plugin -->
 <script src="/javascripts/jquery.fileupload.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="/javascripts/bootstrap/bootstrap.min.js"></script>
-<script src="/javascripts/bootstrap/docs.min.js"></script>
-<script src="/javascripts/jquery/jquery.dataTables.min.js"></script>
-<script src="/javascripts/application.js"></script>
+<script src="/javascripts/jquery.fileupload-process.js"></script>
+<script src="/javascripts/jquery.fileupload-image.js"></script>
+<script src="/javascripts/jquery.fileupload-audio.js"></script>
+<script src="/javascripts/jquery.fileupload-video.js"></script>
+<script src="/javascripts/jquery.fileupload-validate.js"></script>
 
 <script>
-$('#fileupload').fileupload({
-    url: "upload",
-    dataType: 'json',
-    // acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
-    maxFileSize: 5000000, // 5 MB
-
-    done: function (e, data) {
-      data.context = $('<div/>').appendTo('#files');
-      $.each(data.files, function (index, file) {
-          var node = $('<p/>')
-                  .append($('<span/>').text(file.name));
-          /*        
-          if (!index) {
-              node
-                  .append('<br>')
-                  .append(uploadButton.clone(true).data(data));
-          }
-          */
-          node.appendTo(data.context);
-      });
-    },
-    progressall: function (e, data) {
-        var progress = parseInt(data.loaded / data.total * 100, 10);
-        console.log(progress);
-        $('#progress .progress-bar').css(
-            'width',
-            progress + '%'
-        );
-    }
-}).prop('disabled', !$.support.fileInput)
-    .parent().addClass($.support.fileInput ? undefined : 'disabled');
+$( function (){
+  initFileupload();
+});
 </script>
+
 </body>
 </html>
