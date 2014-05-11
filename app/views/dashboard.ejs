@@ -54,17 +54,19 @@
 
   <div class="container">
     <div class="row">
-      <div class="col-md-8">
+      <div class="col-md-12">
         <table id="product-list" cellpadding="0" cellspacing="0" border="0" class="display" width="100%">
         <thead>
           <tr>
             <th>款号</th>
             <th>款号Alias</th>
+            <th>厂家</th>
             <th>厂家款号</th>
             <th>售价</th>
+            <th>成本</th>
             <th>库存</th>
-            <th>Update</th>
-            <th></th>
+            <th>更新时间</th>
+            <th>详细</th>
             <!--
             <th>备注</th>
             <th>编辑</th>
@@ -75,10 +77,15 @@
         </tbody>
         </table>
       </div>
-
-      <div class="col-md-4 bs-example">
+    </div><!-- /row-->
+    <div class="row">
+      <div class="col-md-4">
+        <p>
+          <button type="button" class="btn btn-primary btn-lg" id="add-product">添加产品</button>
+          <button type="button" class="btn btn-default btn-lg" id="add-product-cancel">取消</button>
+        </p>
         <form id="product-form" class="form-horizontal" role="form" 
-          action="/product/add" method="post">
+          action="/product/add" method="post" style="visibility: hidden;">
           <input type="hidden" name="_id">
           <div class="form-group">
             <label for="input-item-name" class="col-sm-3 control-label">款号</label>
@@ -158,8 +165,9 @@
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      </div><!--Form div -->
+      <div class="col-md-8"></div>
+    </div>  
     </div> <!-- /container -->
 
 <% include gallery %>

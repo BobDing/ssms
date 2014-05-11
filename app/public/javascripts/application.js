@@ -1,6 +1,8 @@
 $( function (){
   initDataTable();
   initFileUpload();
+
+  $('#add-product')
 });
 
 var imageIndex = 0;
@@ -65,8 +67,8 @@ function initFileUpload() {
       if (file.url) {
         var link = $('<a>').attr('target', '_blank').prop('href', file.url);
         $(data.context.children()[index]).wrap(link);
-        $('#product-form').append('<input type="text" name="images['+ imageIndex +'][url]" value="' + file.url + '">');
-        $('#product-form').append('<input type="text" name="images['+ imageIndex +'][originalName]" value="' + file.originalName + '">');
+        $('#product-form').append('<input type="hidden" name="images['+ imageIndex +'][url]" value="' + file.url + '">');
+        $('#product-form').append('<input type="hidden" name="images['+ imageIndex +'][originalName]" value="' + file.originalName + '">');
         imageIndex++;
       } else if (file.error) {
         var error = $('<span class="text-danger"/>').text(file.error);
@@ -84,7 +86,7 @@ function initFileUpload() {
 
 
 function initDataTable(){
-  $('#product-list').dataTable({
+  var dt = $('#product-list').DataTable({
     "processing": false,
     "serverSide": false,
     "ajax":"product/listAll",
@@ -93,6 +95,8 @@ function initDataTable(){
       { "data": "itemAlias", "defaultContent": ""},
       { "data": "mfgName", "defaultContent": ""},
       { "data": "mfgItemName", "defaultContent": ""},
+      { "data": "costPrice", "defaultContent": ""},
+      { "data": "sellPrice", "defaultContent": ""},
       { "data": "inventory", "defaultContent": ""},
       { "data": 
         "updateDate",
@@ -104,12 +108,29 @@ function initDataTable(){
       {
         "data": "_id",
         "render": function ( data, type, full ) {
-          return '<button type="button" onclick="showProductDetail(\'' + data + '\')">Detail</button>';
+          return '<button type="button" onclick="showProductDetail(\'' + data + '\')">详细</button>';
         }
       }
     ], 
-    "order": [[1, 'asc']],
+    "order": [[7, 'desc']],
   }); 
+
+  // Add event listener for opening and closing details
+  $('#product-list tbody').on('click', 'tr', function () {
+    var row = dt.row($(this));
+
+    if(row.child.isShown()) {
+      // This row is already open - close it
+      row.child.hide();
+      $(this).removeClass('shown');
+    }
+    else{
+      // Open this row
+      row.child( format(row.data()) ).show();
+      $(this).addClass('shown');
+    }
+
+  });
 }
 
 function showProductDetail(id) {
@@ -138,8 +159,21 @@ function setFormToReadOnlyMode(data){
 
   for (var i = 0; i < data.images.length; i++) {
     $("#files").append(
-    '<a href="' + data.images[i].url + '" title="'+ data.images[i].originalName +'" data-gallery>' + 
+    '<a href="' + data.images[i].url + '" title="'+ data.images[i].originalName +'" data-gallery class="img-responsive">' + 
     '<img src="'+ data.images[i].url + '" alt="'+ data.images[i].originalName +'" class="img-thumbnail"></a>'
     );
   }
+}
+
+/* Formatting function for row details - modify as you need */
+function format ( d ) {
+  var detail = '<div class="well">';
+  for (var i = 0; i < d.images.length; i++) {
+    detail = detail + 
+    '<a href="' + d.images[i].url + '" title="'+ d.images[i].originalName +'" data-gallery>' + 
+    '<img src="'+ d.images[i].url + '" alt="'+ d.images[i].originalName +'" class="img-thumbnail"></a>'
+  }
+  detail = detail + '</div>';
+  
+  return detail;
 }
