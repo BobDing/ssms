@@ -3,7 +3,7 @@ $( function (){
   initFileUpload();
 });
 
-//var tmpFileList = new Array();
+var imageIndex = 0;
 
 function initFileUpload() {
   /*jslint unparam: true, regexp: true */
@@ -65,6 +65,9 @@ function initFileUpload() {
       if (file.url) {
         var link = $('<a>').attr('target', '_blank').prop('href', file.url);
         $(data.context.children()[index]).wrap(link);
+        $('#product-form').append('<input type="text" name="images['+ imageIndex +'][url]" value="' + file.url + '">');
+        $('#product-form').append('<input type="text" name="images['+ imageIndex +'][originalName]" value="' + file.originalName + '">');
+        imageIndex++;
       } else if (file.error) {
         var error = $('<span class="text-danger"/>').text(file.error);
         $(data.context.children()[index]).append('<br>').append(error);
@@ -115,7 +118,28 @@ function showProductDetail(id) {
     {"id": id},
     function(data){ 
       alert("Data Loaded: " + data); 
+      setFormToReadOnlyMode(data);
     },
     "json"
   );  
+}
+
+function setFormToReadOnlyMode(data){
+  var a = $('#product-form input');
+  $('#product-form input').attr('disabled', true);
+  $("input[name='itemName']").val(data.itemName);
+  $("input[name='itemAlias']").val(data.itemAlias);
+  $("input[name='mfgName']").val(data.mfgName);
+  $("input[name='mfgItemName']").val(data.mfgItemName);
+  $("input[name='costPrice']").val(data.costPrice);
+  $("input[name='sellPrice']").val(data.sellPrice);
+  $("input[name='inventory']").val(data.inventory);
+  $("input[name='description']").val(data.description);
+
+  for (var i = 0; i < data.images.length; i++) {
+    $("#files").append(
+    '<a href="' + data.images[i].url + '" title="'+ data.images[i].originalName +'" data-gallery>' + 
+    '<img src="'+ data.images[i].url + '" alt="'+ data.images[i].originalName +'" class="img-thumbnail"></a>'
+    );
+  }
 }

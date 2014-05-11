@@ -38,7 +38,7 @@ router.post('/add', function(req, res) {
     sellPrice:   req.body.sellPrice,
     inventory:   req.body.inventory,
     description: req.body.description,
-    images:      req.body.files
+    images:      req.body.images
   });
 
   // var imagesJSON = "images: [";

@@ -18,6 +18,9 @@
   <link href="/stylesheets/jquery.fileupload.css" rel="stylesheet">
   <link href="/stylesheets/style.css" rel="stylesheet">
 
+  <link rel="stylesheet" href="stylesheets/blueimp-gallery.min.css">
+  <link rel="stylesheet" href="stylesheets/bootstrap-image-gallery.min.css">
+
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -74,55 +77,55 @@
       </div>
 
       <div class="col-md-4 bs-example">
-        <form id="add-product-form" class="form-horizontal" role="form" 
+        <form id="product-form" class="form-horizontal" role="form" 
           action="/product/add" method="post">
           <input type="hidden" name="_id">
           <div class="form-group">
             <label for="input-item-name" class="col-sm-3 control-label">款号</label>
             <div class="col-sm-9">
-              <input type="text" class="form-control" id="input-item-name" name="itemName" placeholder="款号">
+              <input type="text" class="form-control" name="itemName" placeholder="款号">
             </div>
           </div>
           <div class="form-group">
             <label for="input-item-alias" class="col-sm-3 control-label">款号Alias</label>
             <div class="col-sm-9">
-              <input type="text" class="form-control" id="input-item-alias" name="itemAlias" placeholder="款号 Alias">
+              <input type="text" class="form-control" name="itemAlias" placeholder="款号 Alias">
             </div>
           </div>
           <div class="form-group">
             <label for="input-item-alias" class="col-sm-3 control-label">厂家</label>
             <div class="col-sm-9">
-              <input type="text" class="form-control" id="input-item-alias" name="mfgName" placeholder="mfgName">
+              <input type="text" class="form-control" name="mfgName" placeholder="mfgName">
             </div>
           </div>
           <div class="form-group">
             <label for="input-item-alias" class="col-sm-3 control-label">厂家款号</label>
             <div class="col-sm-9">
-              <input type="text" class="form-control" id="input-item-alias" name="mfgItemName" placeholder="mfgItemName">
+              <input type="text" class="form-control" name="mfgItemName" placeholder="mfgItemName">
             </div>
           </div>
           <div class="form-group">
             <label for="input-item-alias" class="col-sm-3 control-label">成本</label>
             <div class="col-sm-9">
-              <input type="text" class="form-control" id="input-item-alias" name="costPrice" placeholder="costPrice">
+              <input type="text" class="form-control" name="costPrice" placeholder="costPrice">
             </div>
           </div>
           <div class="form-group">
             <label for="input-item-alias" class="col-sm-3 control-label">售价</label>
             <div class="col-sm-9">
-              <input type="text" class="form-control" id="input-item-alias" name="sellPrice" placeholder="售价">
+              <input type="text" class="form-control" name="sellPrice" placeholder="售价">
             </div>
           </div>
           <div class="form-group">
             <label for="input-item-alias" class="col-sm-3 control-label">库存</label>
             <div class="col-sm-9">
-              <input type="text" class="form-control" id="input-item-alias" name="inventory" placeholder="库存">
+              <input type="text" class="form-control" name="inventory" placeholder="库存">
             </div>
           </div>
           <div class="form-group">
             <label for="input-item-alias" class="col-sm-3 control-label">备注</label>
             <div class="col-sm-9">
-              <input type="text" class="form-control" id="input-item-alias" name="description" placeholder="备注">
+              <input type="text" class="form-control" name="description" placeholder="备注">
             </div>
           </div>
           
@@ -159,6 +162,7 @@
     </div>
     </div> <!-- /container -->
 
+<% include gallery %>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="/javascripts/jquery/jquery.min.js"></script>
 
@@ -166,7 +170,6 @@
 <script src="/javascripts/bootstrap/bootstrap.min.js"></script>
 <script src="/javascripts/bootstrap/docs.min.js"></script>
 <script src="/javascripts/jquery/jquery.dataTables.js"></script>
-<script src="/javascripts/application.js"></script>
 
 <!-- The Load Image plugin is included for the preview images and image resizing functionality -->
 <script src="http://blueimp.github.io/JavaScript-Load-Image/js/load-image.min.js"></script>
@@ -183,5 +186,11 @@
 <script src="/javascripts/jquery.fileupload-audio.js"></script>
 <script src="/javascripts/jquery.fileupload-video.js"></script>
 <script src="/javascripts/jquery.fileupload-validate.js"></script>
+<script src="/javascripts/application.js"></script>
+
+<!--Gallery-->
+<script src="/javascripts/bootstrap/gallery/jquery.blueimp-gallery.min.js"></script>
+<script src="/javascripts/bootstrap/gallery/bootstrap-image-gallery.min.js"></script>
+
 </body>
 </html>
