@@ -77,4 +77,14 @@ router.get('/listAll', function(req, res) {
 
 });
 
+router.get('/queryById', function(req, res) {
+  Product.findById(req.query.id, function(err, product) {
+    if (!err){ 
+       res.json(product);
+     }
+    else { throw err;}
+  });
+});
+
+
 module.exports = router;

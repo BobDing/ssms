@@ -1,5 +1,5 @@
 $( function (){
-  
+  initDataTable();
   initFileUpload();
 });
 
@@ -82,6 +82,8 @@ function initFileUpload() {
 
 function initDataTable(){
   $('#product-list').dataTable({
+    "processing": false,
+    "serverSide": false,
     "ajax":"product/listAll",
     "columns": [
       { "data": "itemName", "defaultContent": ""},
@@ -89,23 +91,31 @@ function initDataTable(){
       { "data": "mfgName", "defaultContent": ""},
       { "data": "mfgItemName", "defaultContent": ""},
       { "data": "inventory", "defaultContent": ""},
+      { "data": 
+        "updateDate",
+        "render": function ( data, type, full ) {
+          return new Date(data).toLocaleString();
+        }
+      },
      //{ "data": "_id"},
-    ],
-    
-    "columnDefs": [
       {
-        "targets": [ -1 ],
-        //"visible": false,
-        //"searchable": false,
         "data": "_id",
-        "defaultContent": "<button>Click!</button>"
+        "render": function ( data, type, full ) {
+          return '<button type="button" onclick="showProductDetail(\'' + data + '\')">Detail</button>';
+        }
       }
-    ]
+    ], 
+    "order": [[1, 'asc']],
+  }); 
+}
 
-  });
-
-  // Add event listener for opening and closing details
-  $('#product-list tbody').on('click', 'td.details-control', function () {
-    console.log('click');
-  });
+function showProductDetail(id) {
+  $.get(
+    "product/queryById", 
+    {"id": id},
+    function(data){ 
+      alert("Data Loaded: " + data); 
+    },
+    "json"
+  );  
 }
