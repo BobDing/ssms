@@ -25,4 +25,4 @@ build/Release
 node_modules
 
 # File upload dir
-public/uploads
+uploads
