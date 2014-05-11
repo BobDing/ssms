@@ -46,7 +46,7 @@ function initFileupload() {
     });
 
   $('#fileupload').fileupload({
-    url: 'upload',
+    url: '/upload',
     dataType: 'json',
     autoUpload: false,
     acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,

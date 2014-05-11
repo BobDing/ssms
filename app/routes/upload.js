@@ -12,9 +12,10 @@ module.exports = router;
 var upload = require('jquery-file-upload-middleware');
 // configure upload middleware
 console.log(__dirname);
+
 upload.configure({
-    uploadDir: __dirname + '../public/uploads',
-    uploadUrl: '/uploads',
+    //uploadDir: __dirname + '/../public/uploads',
+    //uploadUrl: '/uploads',
     
     /*
     imageVersions: {

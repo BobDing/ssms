@@ -24,7 +24,19 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/upload', upload.fileHandler());
+//app.use('/upload', upload.fileHandler());
+app.use(
+  '/upload', 
+  function (req, res, next) {
+    var d = new Date();
+    var datePath = d.getFullYear() + '/' + d.getMonth() + '/' + d.getDate();
+    // imageVersions are taken from upload.configure()
+    upload.fileHandler({
+      uploadDir: function () { return __dirname + '/public/uploads/' + datePath },
+      uploadUrl: function () { return '/uploads/' + datePath }
+    })(req, res, next);
+});
+
 app.use('/product', product);
 
 /// catch 404 and forwarding to error handler
