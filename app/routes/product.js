@@ -5,6 +5,7 @@ mongoose.connect('mongodb://localhost/store');
 var db = mongoose.connection;
 var Product;
 db.on('error', console.error.bind(console, 'connection error:'));
+
 db.once('open', function callback () {
   var Schema = mongoose.Schema;
   var productSchema = new Schema({
@@ -18,7 +19,8 @@ db.once('open', function callback () {
     description: String,
     createDate:  { type: Date, default: Date.now },
     updateDate:  { type: Date, default: Date.now },
-    isActive:    Boolean
+    isActive:    Boolean,
+    images: [{ url: String, originalName: String }],
   });
   Product = mongoose.model('Product', productSchema);
 });
@@ -35,8 +37,19 @@ router.post('/add', function(req, res) {
     costPrice:   req.body.costPrice,
     sellPrice:   req.body.sellPrice,
     inventory:   req.body.inventory,
-    description: req.body.description
+    description: req.body.description,
+    images:      req.body.files
   });
+
+  // var imagesJSON = "images: [";
+  // //if()
+  // for (var i = 0; i < req.body.files.length; i++) {
+  //   var url = req.body.files[i].url;
+  //   var originalName = req.body.files.originalName[i];
+  //   imagesJSON = imagesJSON + "{url:" + url + ",originalName:" + originalName + "}";
+  // };
+  // var imagesJSON = imagesJSON + "]";
+  // product.images = imagesJSON;
 
   //mongoose.connect('mongodb://localhost/mydb');
   product.save(function(err) {
@@ -44,7 +57,7 @@ router.post('/add', function(req, res) {
       console.log('error');
     //mongoose.disconnect();
   });
-  res.render('dashboard', {title: 'Express'});
+  res.redirect('/');
 });
 
 router.get('/listAll', function(req, res) {

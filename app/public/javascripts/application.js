@@ -1,34 +1,11 @@
 $( function (){
-  $('#product-list').dataTable({
-    "ajax":"product/listAll",
-    "columns": [
-      { "data": "itemName", "defaultContent": ""},
-      { "data": "itemAlias", "defaultContent": ""},
-      { "data": "mfgName", "defaultContent": ""},
-      { "data": "mfgItemName", "defaultContent": ""},
-      { "data": "inventory", "defaultContent": ""},
-     //{ "data": "_id"},
-    ],
-    
-    "columnDefs": [
-      {
-        "targets": [ -1 ],
-        //"visible": false,
-        //"searchable": false,
-        "data": "_id",
-        "defaultContent": "<button>Click!</button>"
-      }
-    ]
-
-  });
-
-  // Add event listener for opening and closing details
-    $('#product-list tbody').on('click', 'td.details-control', function () {
-      console.log('click');
-    });
+  
+  initFileUpload();
 });
 
-function initFileupload() {
+//var tmpFileList = new Array();
+
+function initFileUpload() {
   /*jslint unparam: true, regexp: true */
   /*global window, $ */
   'use strict';
@@ -100,4 +77,35 @@ function initFileupload() {
     });
   }).prop('disabled', !$.support.fileInput)
     .parent().addClass($.support.fileInput ? undefined : 'disabled');
+}
+
+
+function initDataTable(){
+  $('#product-list').dataTable({
+    "ajax":"product/listAll",
+    "columns": [
+      { "data": "itemName", "defaultContent": ""},
+      { "data": "itemAlias", "defaultContent": ""},
+      { "data": "mfgName", "defaultContent": ""},
+      { "data": "mfgItemName", "defaultContent": ""},
+      { "data": "inventory", "defaultContent": ""},
+     //{ "data": "_id"},
+    ],
+    
+    "columnDefs": [
+      {
+        "targets": [ -1 ],
+        //"visible": false,
+        //"searchable": false,
+        "data": "_id",
+        "defaultContent": "<button>Click!</button>"
+      }
+    ]
+
+  });
+
+  // Add event listener for opening and closing details
+  $('#product-list tbody').on('click', 'td.details-control', function () {
+    console.log('click');
+  });
 }
